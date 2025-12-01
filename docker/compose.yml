@@ -1,0 +1,14 @@
+services:
+    app:
+        build:
+            context: ..
+            dockerfile: ./docker/dockerfile
+            target: production
+        env_file:
+            - ../.env
+        ports:
+            - "8001:8000"
+
+networks:
+    default:
+        name: detector_network
