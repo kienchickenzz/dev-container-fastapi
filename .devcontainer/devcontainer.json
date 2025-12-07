@@ -1,7 +1,6 @@
 {
     "name": "Detector devcontainer",
     "dockerComposeFile": [
-        "../docker/compose.dev.yml",
         "compose.yml"
     ],
     "service": "app",

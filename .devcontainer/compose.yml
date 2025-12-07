@@ -1,8 +1,8 @@
 services:
     # Update this to the name of the service you want to work with in your docker-compose.yml file
     app:
-        hostname: "detector_app"
-        container_name: "detector_app"
+        hostname: "hello_world_app"
+        container_name: "hello_world_app"
         # Uncomment if you want to override the service's Dockerfile to one in the .devcontainer
         # folder. Note that the path of the Dockerfile and context is relative to the *primary*
         # docker-compose.yml file (the first in the devcontainer.json "dockerComposeFile"
@@ -26,7 +26,7 @@ services:
 
         env_file:
         - ../.env
-        - ../.devcontainer/.env.dev
+        - ../.devcontainer/.env
 
         # Uncomment the next four lines if you will use a ptrace-based debugger like C++, Go, and Rust.
         # cap_add:
@@ -38,15 +38,14 @@ services:
         command: sleep infinity
     
     db:
-        hostname: "detector_db"
-        container_name: "detector_db"
+        hostname: "hello_world_db"
+        container_name: "hello_world_db"
         image: "postgres:15-alpine"
         ports:
         - "5432:5432"
         volumes:
-        - ../.devcontainer/postgres_bootstrap:/docker-entrypoint-initdb.d
+        - ./postgres_bootstrap:/docker-entrypoint-initdb.d
         environment:
-            PGPORT: "5432"
-            POSTGRES_DB: "db"
-            POSTGRES_USER: "postgres"
-            POSTGRES_PASSWORD: "postgres"
+            POSTGRES_DB: ${DB_NAME}
+            POSTGRES_USER: ${DB_USER}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
